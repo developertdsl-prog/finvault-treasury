@@ -8,40 +8,6 @@
 [![ISO 20022 Certified](https://img.shields.io/badge/ISO%2020022-pain.001%2Fcamt.053-indigo.svg)](#iso-20022-compliance)
 [![Test Coverage](https://img.shields.io/badge/Coverage-98.7%25-brightgreen.svg)](#automated-test-suites)
 
-FinVault-Treasury is an enterprise-scale treasury management platform designed for multi-national conglomerates and financial institutions. It automates global multi-currency cash visibility, Zero-Balance Account (ZBA) sweeps, notional liquidity pooling, automated cross-border FX hedging, and ISO 20022 bank reconciliation.
-
----
-
-## 🏛️ System Architecture
-
-```mermaid
-flowchart TD
-    Subsidiaries[("Global Subsidiaries (US, UK, EU, JP, SG)")] --> Accounts["Multi-Currency Operating Accounts"]
-    
-    subgraph LiquidityPlane["Liquidity Concentration & Sweeping"]
-        Accounts --> SweepEngine["Zero-Balance (ZBA) & Target Sweeper"]
-        SweepEngine --> MasterPool[("Corporate Master Liquidity Pool")]
-        MasterPool --> YieldOpt["Overnight Repo & Yield Optimizer"]
-    end
-    
-    subgraph RiskPlane["FX Risk & Market Exposure"]
-        MasterPool --> ExposureMonitor["FX Exposure Calculator"]
-        ExposureMonitor --> HedgeEngine["Automated FX Forward & Collar Hedger"]
-        HedgeEngine --> MarketRates[("Live FX Rate Aggregator")]
-    end
-    
-    subgraph CompliancePlane["Reconciliation & Settlement"]
-        Accounts & MasterPool --> SwiftISO["ISO 20022 XML Gateway (pain.001 / camt.053)"]
-        SwiftISO --> ReconEngine["3-Way Automated Bank Reconciliation Engine"]
-        ReconEngine --> AuditLedger[("Immutable Compliance Audit Trail")]
-    end
-    
-    subgraph UIPlane["Treasury Terminal Console"]
-        MasterPool & ExposureMonitor & ReconEngine --> Console[("React 18 Treasury Terminal Console")]
-    end
-```
-
----
 
 ## 🚀 Key Architectural Capabilities
 
